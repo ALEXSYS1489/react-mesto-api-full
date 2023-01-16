@@ -1,0 +1,14 @@
+.sign {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 60px 0 0;
+    width: 358px;
+}
+
+@media (max-width: 767px) {
+    .sign {
+        padding: 40px 0 0;
+        width: 260px;
+    }
+  }

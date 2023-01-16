@@ -1,0 +1,11 @@
+.popup__save_active {
+  color: #FFF;
+  background-color: #000;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup__save_active:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

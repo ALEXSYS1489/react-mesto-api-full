@@ -1,0 +1,9 @@
+/* .header_loggedin{
+    
+} */
+
+@media (max-width: 767px) {
+    .header_loggedin{
+        flex-direction: column-reverse;
+    }
+  }

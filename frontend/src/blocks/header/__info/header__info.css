@@ -1,0 +1,14 @@
+.header__info {
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .header__info {
+        display: none;
+        align-items: center;
+        flex-direction: column;
+        margin: 0 0 27px;
+        border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+        padding: 0 0 40px;
+    }
+  }

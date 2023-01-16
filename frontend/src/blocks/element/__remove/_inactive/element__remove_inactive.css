@@ -1,0 +1,4 @@
+.element__remove_inactive{
+  opacity: 0;
+  pointer-events: none;
+}

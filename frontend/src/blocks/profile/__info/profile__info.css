@@ -1,0 +1,16 @@
+.profile__info {
+  width: 336px;
+  padding: 22px 0 0 30px;
+  display: grid;
+  grid-template-columns: 294px 1fr;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 0 0;
+    width: 189px;
+  }
+}

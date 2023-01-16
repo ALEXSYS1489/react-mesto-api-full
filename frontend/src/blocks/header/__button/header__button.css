@@ -1,0 +1,9 @@
+.header__button{
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .header__button{
+        display: inline;
+    }
+  }
