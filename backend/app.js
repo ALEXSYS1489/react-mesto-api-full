@@ -4,6 +4,7 @@ const cors = require('cors');
 const { errors, celebrate, Joi } = require('celebrate');
 const routes = require('./routes/index');
 const { addUser, login } = require('./controllers/users');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -12,6 +13,8 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+
+app.use(requestLogger);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -36,6 +39,8 @@ app.post('/signup', celebrate({
 }), addUser);
 
 app.use(routes);
+
+app.use(errorLogger);
 
 app.use(errors());
 
