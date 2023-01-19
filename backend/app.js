@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -6,7 +7,7 @@ const routes = require('./routes/index');
 const { addUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_ADDRESS } = process.env;
 
 const app = express();
 
@@ -15,6 +16,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -66,7 +73,7 @@ app.use((err, req, res, next) => {
 });
 
 async function connect() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {});
+  await mongoose.connect(DB_ADDRESS, {});
   app.listen(PORT);
 }
 

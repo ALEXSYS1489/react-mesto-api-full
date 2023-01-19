@@ -204,7 +204,7 @@ function App() {
       if (!token) {
         throw new Error("no token");
       }
-      const user = await Auth.checkToken(token);
+      const user = await Auth.checkToken();
       if (!user) {
         throw new Error("invalid user");
       }

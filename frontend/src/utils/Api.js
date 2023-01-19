@@ -3,14 +3,16 @@ import * as utils from "./utils.js";
 export class Api {
   constructor(config){
     this._url = config.url
-    this._headers = config.headers
-    this._id = config.id
-    this._link = `${this._url}/v1/${this._id}`
+    this._link = `${this._url}`
   }
 
   getAllCards(){
+    const token = localStorage.getItem('token')
     return fetch(`${this._link}/cards`, {
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     })
     .then((res)=>{
         return this._onResponce(res)
@@ -18,8 +20,12 @@ export class Api {
   }
 
   getUser(){
+    const token = localStorage.getItem('token')
     return fetch(`${this._link}/users/me`, {
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     })
     .then((res)=>{
       return this._onResponce(res)
@@ -27,9 +33,13 @@ export class Api {
   }
 
   editUser(name, about) {
+    const token = localStorage.getItem('token')
     return fetch(`${this._link}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: name,
         about: about
@@ -41,9 +51,13 @@ export class Api {
   }
 
   deleteCard(idCard){
+    const token = localStorage.getItem('token')
     return fetch(`${this._link}/cards/${idCard}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     })
     .then((res)=>{
       return this._onResponce(res)
@@ -51,9 +65,13 @@ export class Api {
   }
 
   addCard(name, link){
+    const token = localStorage.getItem('token')
     return fetch(`${this._link}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: name,
         link: link
@@ -72,9 +90,13 @@ export class Api {
   }
 
 addLike(idCard){
+  const token = localStorage.getItem('token')
   return fetch(`${this._link}/cards/${idCard}/likes`, {
     method: 'PUT',
-    headers: this._headers,
+    headers: {
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
   })
   .then((res)=>{
     return this._onResponce(res)
@@ -82,9 +104,13 @@ addLike(idCard){
 }
 
 deleteLike(idCard){
+  const token = localStorage.getItem('token')
   return fetch(`${this._link}/cards/${idCard}/likes`, {
     method: 'DELETE',
-    headers: this._headers,
+    headers: {
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
   })
   .then((res)=>{
     return this._onResponce(res)
@@ -92,9 +118,13 @@ deleteLike(idCard){
 }
 
 editAvatar(avatar) {
+  const token = localStorage.getItem('token')
   return fetch(`${this._link}/users/me/avatar`, {
     method: 'PATCH',
-    headers: this._headers,
+    headers: {
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({
       avatar: avatar
     })
@@ -105,10 +135,14 @@ editAvatar(avatar) {
 }
 
 changeLikeCardStatus(idCard, isLiked){
+  const token = localStorage.getItem('token')
   if(!isLiked){
     return fetch(`${this._link}/cards/${idCard}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
     })
     .then((res)=>{
       return this._onResponce(res)
@@ -117,7 +151,10 @@ changeLikeCardStatus(idCard, isLiked){
   else {
     return fetch(`${this._link}/cards/${idCard}/likes`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
     })
     .then((res)=>{
       return this._onResponce(res)

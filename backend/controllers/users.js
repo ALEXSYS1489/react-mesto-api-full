@@ -1,3 +1,4 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -97,7 +98,7 @@ const login = async (req, res, next) => {
     const matched = await bcrypt.compare(password, user.password);
     if (!matched) throw new Error401('Неправильные почта или пароль');
 
-    const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
     res.send({ token });
   } catch (err) {
     next(err);

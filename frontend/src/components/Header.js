@@ -15,7 +15,7 @@ function Header(props) {
         </div>
         <div className={props.active ? "header__info header__info_active" : "header__info"}>
           <p className="header__email">
-            {props.user ? props.user.data.email : ""}
+            {props.user ? props.user.email : ""}
           </p>
           <Link
             to="/sign-in"

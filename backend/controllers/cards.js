@@ -45,7 +45,7 @@ const likeCard = async (req, res, next) => {
       req.params.cardId,
       { $addToSet: { likes: req.user._id } },
       { new: true },
-    );
+    ).populate(['owner', 'likes']);
     res.send(updetedCard);
   } catch (err) {
     next(err);
@@ -61,7 +61,7 @@ const dislikeCard = async (req, res, next) => {
       req.params.cardId,
       { $pull: { likes: req.user._id } },
       { new: true },
-    );
+    ).populate(['owner', 'likes']);
     res.send(updetedCard);
   } catch (err) {
     next(err);
