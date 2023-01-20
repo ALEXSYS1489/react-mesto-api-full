@@ -8,10 +8,8 @@ const routes = express.Router();
 
 routes.use('/users', auth, users);
 routes.use('/cards', auth, cards);
-routes.use('/*', async (req, res, next) => {
-  try {
-    throw new Error404('Страница не найдена');
-  } catch (err) { next(err); }
+routes.use('/*', auth, () => {
+  throw new Error404('Страница не найдена');
 });
 
 module.exports = routes;

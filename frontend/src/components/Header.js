@@ -4,7 +4,7 @@ import close from "../images/HeaderClose.svg";
 import { Link, Route } from "react-router-dom";
 
 function Header(props) {
-
+  
   return (
     <>
       <Route exact path="/">

@@ -222,6 +222,7 @@ function App() {
       api
         .getUser()
         .then((data) => {
+          setUserAuth(data)
           setCurrentUser(data);
         })
         .catch((err) => {

@@ -7,7 +7,7 @@ const routes = require('./routes/index');
 const { addUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, DB_ADDRESS } = process.env;
+const { PORT = 3000, DB_ADDRESS = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-  }).unknown(true),
+  }),
 }), login);
 
 app.post('/signup', celebrate({
@@ -42,7 +42,7 @@ app.post('/signup', celebrate({
       }
       return helpers.message('Не корректная ссылка на аватар');
     }),
-  }).unknown(true),
+  }),
 }), addUser);
 
 app.use(routes);

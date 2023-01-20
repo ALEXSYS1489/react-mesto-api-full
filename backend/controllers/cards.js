@@ -5,7 +5,7 @@ const Error404 = require('../errors/error404');
 
 const getCards = async (req, res, next) => {
   try {
-    const cards = await Card.find({}).populate(['owner', 'likes']);
+    const cards = await Card.find({}).sort({ createdAt: -1 }).populate(['owner', 'likes']);
     res.send(cards);
   } catch (err) {
     next(err);
